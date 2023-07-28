@@ -1,0 +1,43 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "level1.tmx",
+    "expandedProjectPaths": [
+        "."
+    ],
+    "fileStates": {
+        "estimation_land.tsx": {
+            "scaleInDock": 0.9908,
+            "scaleInEditor": 1
+        },
+        "estimation_land_props.tsx": {
+            "scaleInDock": 0.9652,
+            "scaleInEditor": 1
+        },
+        "level1.tmx": {
+            "scale": 1.495,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 753.1772575250836,
+                "y": 413.3779264214047
+            }
+        }
+    },
+    "last.imagePath": "/Users/BoehT/Downloads/Pixel Art Platformer - Village Props v2/Texture",
+    "map.lastUsedFormat": "tmx",
+    "map.width": 60,
+    "openFiles": [
+        "estimation_land.tsx",
+        "level1.tmx",
+        "estimation_land_props.tsx"
+    ],
+    "project": "estimation_land.tiled-project",
+    "recentFiles": [
+        "estimation_land.tsx",
+        "estimation_land_props.tsx",
+        "level1.tmx"
+    ],
+    "tileset.lastUsedFormat": "tsx"
+}

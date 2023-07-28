@@ -1,0 +1,6 @@
+class: Estimation
+table: estimation
+fields:
+  name: String
+  topic: String
+  storypoint: String
