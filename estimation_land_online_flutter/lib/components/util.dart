@@ -1,3 +1,5 @@
+import 'package:estimation_land_online_flutter/components/collision_block.dart';
+
 bool checkCollision(player, block) {
   final hitbox = player.hitbox;
   final playerX = player.position.x + hitbox.offsetX;
@@ -13,7 +15,9 @@ bool checkCollision(player, block) {
   final fixedX = player.scale.x < 0
       ? playerX - (hitbox.offsetX * 2) - playerWidth
       : playerX;
-  final fixedY = block.isPlatform ? playerY + playerHeight : playerY;
+  final fixedY = block.collisionType == CollisionBlockType.platform
+      ? playerY + playerHeight
+      : playerY;
 
   return (fixedY < blockY + blockHeight &&
       playerY + playerHeight > blockY &&

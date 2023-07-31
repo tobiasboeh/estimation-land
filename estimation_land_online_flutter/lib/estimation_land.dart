@@ -13,14 +13,19 @@ const String pmMan = 'Pink Man';
 const String pmPink = 'TH_Pink Monster';
 const String pmDude = 'TH_Dude Monster';
 const String pmOwlet = 'TH_Owlet Monster';
+const width = 640.0;
+const height = 320.0;
 
 class EstimationLand extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
-  late final CameraComponent cam;
-  late final ParallaxBackground bg;
-  Player player = Player(character: pmMask);
+  late CameraComponent cam;
+  late ParallaxBackground bg;
+  late Level world;
+  late FpsTextComponent fps;
+  late Player player;
   late JoystickComponent joystick;
   bool showJoystick = false;
+  bool levelLoaded = false;
 
   @override
   Color backgroundColor() => const Color.fromARGB(255, 185, 210, 234);
@@ -30,26 +35,55 @@ class EstimationLand extends FlameGame
     // Load all images into cache
     await images.loadAllImages();
     debugColor = Colors.red;
-    final world = Level(
-      player: player,
-      levelName: 'result',
-    );
 
-    const width = 640.0;
-    cam = CameraComponent.withFixedResolution(
-        world: world, width: width, height: 320);
-
-    cam.follow(player, snap: true, horizontalOnly: true);
-    cam.setBounds(Rectangle.fromLTRB(width / 2, 160, 1920 - width / 2, 320));
-    final fps = FpsTextComponent(position: Vector2(10, 10));
-
-    bg = ParallaxBackground();
-    addAll([bg, cam, world, fps]);
+    loadLevel('level2');
 
     if (showJoystick) {
       addJoystick();
     }
     return super.onLoad();
+  }
+
+  loadLevel(String levelName) async {
+    if (levelLoaded) {
+      unload();
+    }
+    player = Player(character: pmMask);
+    world = Level(
+      player: player,
+      levelName: levelName,
+    );
+    await add(world);
+    cam = CameraComponent.withFixedResolution(
+        world: world, width: width, height: height);
+    cam.follow(player, snap: false, horizontalOnly: false);
+    cam.setBounds(
+      Rectangle.fromLTRB(width / 2, height / 2, world.level.width - width / 2,
+          world.level.height - height / 2),
+    );
+    fps = FpsTextComponent(position: Vector2(10, 10));
+
+    bg = ParallaxBackground();
+    addAll([bg, cam, fps]);
+    levelLoaded = true;
+  }
+
+  unload() {
+    if (cam.isMounted) {
+      cam.removeFromParent();
+    }
+    if (bg.isMounted) {
+      bg.removeFromParent();
+    }
+    if (world.isMounted) {
+      world.removeFromParent();
+    }
+    if (fps.isMounted) {
+      fps.removeFromParent();
+    }
+    if (player.isMounted) {
+      player.removeFromParent();
+    }
   }
 
   @override

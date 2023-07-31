@@ -20,12 +20,12 @@
 </data>
  </layer>
  <objectgroup id="4" name="Collisions" class="Collisions">
-  <object id="23" type="Collisions" x="0.644579" y="223.024" width="1918.91" height="95.3977"/>
-  <object id="24" type="Collisions" x="-5.15663" y="0" width="5.80121" height="224.314"/>
-  <object id="25" type="Collisions" x="1913.11" y="-0.644579" width="10.9578" height="232.048"/>
-  <object id="26" name="0.5" type="Estimation" x="928" y="96" width="32" height="32"/>
-  <object id="27" name="1" type="Estimatiom" x="1056" y="96" width="32" height="32"/>
-  <object id="28" name="2" type="Estimation" x="1184" y="96" width="32" height="32"/>
+  <object id="23" x="0.644579" y="223.024" width="1918.91" height="95.3977"/>
+  <object id="24" x="-5.15663" y="0" width="5.80121" height="224.314"/>
+  <object id="25" type="LevelEnd" x="1913.11" y="-0.644579" width="10.9578" height="232.048"/>
+  <object id="26" x="928" y="96" width="32" height="32"/>
+  <object id="27" x="1056" y="96" width="32" height="32"/>
+  <object id="28" x="1184" y="96" width="32" height="32"/>
   <object id="31" x="1312" y="96" width="32" height="32"/>
   <object id="32" x="1440" y="96" width="32" height="32"/>
   <object id="33" x="1568" y="96" width="32" height="32"/>

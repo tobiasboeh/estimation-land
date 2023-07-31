@@ -1,11 +1,17 @@
 import 'package:flame/components.dart';
 
+enum CollisionBlockType {
+  block,
+  platform,
+  levelEnd,
+}
+
 class CollisionBlock extends PositionComponent {
-  bool isPlatform;
+  CollisionBlockType collisionType;
   CollisionBlock({
     position,
     size,
-    this.isPlatform = false,
+    this.collisionType = CollisionBlockType.block,
   }) : super(
           position: position,
           size: size,

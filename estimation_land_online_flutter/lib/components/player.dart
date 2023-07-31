@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:estimation_land_online_flutter/components/collision_block.dart';
 import 'package:estimation_land_online_flutter/components/util.dart';
 import 'package:estimation_land_online_flutter/components/custom_hitbox.dart';
+import 'package:estimation_land_online_flutter/estimation_land.dart';
 import 'package:flame/collisions.dart';
 
 import 'package:flame/components.dart';
@@ -25,7 +26,7 @@ class Player extends SpriteAnimationGroupComponent
   final double _jumpForce = 350;
   final double _terminalVelocity = 300;
   double horizontalMovement = 0;
-  double moveSpeed = 150;
+  double moveSpeed = 200;
   Vector2 velocity = Vector2.zero();
   bool isOnGround = false;
   bool hasJumped = false;
@@ -137,10 +138,13 @@ class Player extends SpriteAnimationGroupComponent
     current = playerState;
   }
 
-  void _checkHorizontalCollisions() {
+  void _checkHorizontalCollisions() async {
     for (final block in collisionBlocks) {
-      if (!block.isPlatform) {
+      if (block.collisionType != CollisionBlockType.platform) {
         if (checkCollision(this, block)) {
+          if (block.collisionType == CollisionBlockType.levelEnd) {
+            (gameRef as EstimationLand).loadLevel('result');
+          }
           if (velocity.x > 0) {
             velocity.x = 0;
             position.x = block.x - hitbox.offsetX - hitbox.width;
@@ -164,7 +168,7 @@ class Player extends SpriteAnimationGroupComponent
 
   void _checkVerticalCollisions() {
     for (final block in collisionBlocks) {
-      if (block.isPlatform) {
+      if (block.collisionType == CollisionBlockType.platform) {
         if (checkCollision(this, block)) {
           if (velocity.y > 0) {
             velocity.y = 0;

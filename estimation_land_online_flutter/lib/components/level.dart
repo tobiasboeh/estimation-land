@@ -20,9 +20,7 @@ class Level extends World with HasGameRef<EstimationLand> {
   Future<void> onLoad() async {
     level = await TiledComponent.load('$levelName.tmx', Vector2.all(32));
 
-    // _parallaxBackground();
     add(level);
-    // _scrollingBackground();
     _spawningObjects();
     _addText();
     _addCollisions();
@@ -97,24 +95,23 @@ class Level extends World with HasGameRef<EstimationLand> {
 
     if (collisionsLayer != null) {
       for (final collision in collisionsLayer.objects) {
+        final CollisionBlockType collisionType;
         switch (collision.class_) {
           case 'Platform':
-            final platform = CollisionBlock(
-              position: Vector2(collision.x, collision.y),
-              size: Vector2(collision.width, collision.height),
-              isPlatform: true,
-            );
-            collisionBlocks.add(platform);
-            add(platform);
+            collisionType = CollisionBlockType.platform;
+            break;
+          case 'LevelEnd':
+            collisionType = CollisionBlockType.levelEnd;
             break;
           default:
-            final block = CollisionBlock(
-              position: Vector2(collision.x, collision.y),
-              size: Vector2(collision.width, collision.height),
-            );
-            collisionBlocks.add(block);
-            add(block);
+            collisionType = CollisionBlockType.block;
         }
+        final block = CollisionBlock(
+            position: Vector2(collision.x, collision.y),
+            size: Vector2(collision.width, collision.height),
+            collisionType: collisionType);
+        collisionBlocks.add(block);
+        add(block);
       }
     }
     player.collisionBlocks = collisionBlocks;
